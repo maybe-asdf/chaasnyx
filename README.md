@@ -9,7 +9,7 @@ It's not a work of art as of now, since it only is in the alpha stages, but it's
 get better as time goes by. For support join server ilovefemboys.duckdns.org (may be unactive)
 or dm maybe.asdf on discord. 
 
-# Installation
+# Installation (Client)
 ## W\*ndows
 - Some day.. maybe some day.. w\*nd\*ws sucks anyways
 ## Linux / MacOS(?)
@@ -19,8 +19,18 @@ or dm maybe.asdf on discord.
 git clone https://github.com/maybe-asdf/chaasnyx/
 ```
 - CD into the cloned repo, and run `./setup.sh`
-- Now if you want to run server run `./server.sh`, and if you wanna connect to servers do `./client.py`.
-
+- Now do `./client.py`.
+# Installation (Server)
+## Linux 
+- First install git, which i assume you already have
+- Clone this repo by running this command
+```
+git clone https://github.com/maybe-asdf/chaasnyx/
+```
+- CD into the cloned repo, and run `./setup.sh`
+- Now do `./client.py`.
+### Port forwarding
+- More details on this can be accessed on probably your router providers website, but for the service to be accessed outside of your home network you need to forward port 6741
   
 
 
