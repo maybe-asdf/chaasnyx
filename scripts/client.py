@@ -4,7 +4,7 @@ import websockets
 from prompt_toolkit.patch_stdout import patch_stdout
 from prompt_toolkit import PromptSession
 
-ver = "v000001"
+ver = "v000002"
 print(fr"""
       __                               
  ____/ /  ___ ____ ____ ___  __ ____ __

@@ -1,4 +1,4 @@
-ver = "v000001"
+ver = "v000002"
 print(fr"""
       __                               
  ____/ /  ___ ____ ____ ___  __ ____ __
@@ -36,7 +36,7 @@ async def handler(websocket):
     senders.add(sender_name)
     clients.add(websocket)
 
-    # Notify everyone that this user joined
+    # join message
     for client in clients.copy():
         try:
             await client.send(f"- {sender_name} - just joined -")
@@ -59,7 +59,12 @@ async def handler(websocket):
     finally:
         clients.discard(websocket)
         senders.discard(sender_name)
-
+        for client in clients.copy():
+                try:
+                    await client.send(f"- {sender_name} - just left -")
+                except:
+                    clients.discard(client)
+                    senders.discard(sender_name)
 async def main():
     log("Open for business!")
     async with serve(handler, "0.0.0.0", 6741):
