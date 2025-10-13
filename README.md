@@ -11,7 +11,7 @@ or dm maybe.asdf on discord.
 
 # Installation
 ## W\*ndows
-- Some day.. maybe some day.. windows sucks anyways
+- Some day.. maybe some day.. w\*nd\*ws sucks anyways
 ## Linux / MacOS(?)
 - First install git, which i assume you already have
 - Clone this repo by running this command
