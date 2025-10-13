@@ -62,7 +62,7 @@ async def handler(websocket):
 
 async def main():
     log("Open for business!")
-    async with serve(handler, "localhost", 6741):
+    async with serve(handler, "0.0.0.0", 6741):
         await asyncio.Future()
 
 if __name__ == "__main__":
