@@ -51,12 +51,12 @@ async def handler(websocket):
             sender = message["sender"]
             if message_content[0] == ">":
                 if message_content == ">list":
-                    await client.send(json.dumps({"sender": "SERVER", "content": str(senders)}))
+                    await websocket.send(json.dumps({"sender": "SERVER", "content": str(senders)}))
                 elif message_content == ">help":
-                    await client.send(json.dumps({"sender": "SERVER", "content": "Commands:"}))
-                    await client.send(json.dumps({"sender": "SERVER", "content": ">list - lists all active users"}))
+                    await websocket.send(json.dumps({"sender": "SERVER", "content": "Commands:"}))
+                    await websocket.send(json.dumps({"sender": "SERVER", "content": ">list - lists all active users"}))
                 else:
-                    await client.send(json.dumps({"sender": "SERVER", "content": "Unknown command. Try >help"}))
+                    await websocket.send(json.dumps({"sender": "SERVER", "content": "Unknown command. Try >help"}))
             else:
                 for client in clients.copy():
                     try:
