@@ -31,6 +31,12 @@ git clone https://github.com/maybe-asdf/chaasnyx/
 - Now do `./client.py`.
 ### Port forwarding
 - More details on this can be accessed on probably your router providers website, but for the service to be accessed outside of your home network you need to forward port 6741
-  
+# Roadmap
+- Commands [✅]
+- Whisper [✅]
+- Role system [🔨]
+- Passwords for privileged usernames [❌]
+- Plugin system [❌]
+- Web UI [❌]
 
 
