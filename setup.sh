@@ -6,4 +6,5 @@ source venv/bin/activate
 echo "Activated"
 pip install websockets
 pip install prompt_toolkit
+pip install toml
 echo "Installed"
