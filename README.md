@@ -19,7 +19,7 @@ or dm maybe.asdf on discord.
 git clone https://github.com/maybe-asdf/chaasnyx/
 ```
 - CD into the cloned repo, and run `./setup.sh`
-- Now do `./client.py`.
+- Now do `./client.sh`.
 # Installation (Server)
 ## Linux 
 - First install git, which i assume you already have
@@ -28,7 +28,7 @@ git clone https://github.com/maybe-asdf/chaasnyx/
 git clone https://github.com/maybe-asdf/chaasnyx/
 ```
 - CD into the cloned repo, and run `./setup.sh`
-- Now do `./client.py`.
+- Now do `./server.sh`.
 ### Port forwarding
 - More details on this can be accessed on probably your router providers website, but for the service to be accessed outside of your home network you need to forward port 6741
 # Roadmap
