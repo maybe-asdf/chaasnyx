@@ -18,8 +18,8 @@ or dm maybe.asdf on discord.
 ```
 git clone https://github.com/maybe-asdf/chaasnyx/
 ```
-- CD into the cloned repo, and run `./setup.sh`
-- Now do `./client.sh`.
+- CD into the cloned repo, and run `python3 -m venv venv` then `source venv/bin/activate` and finally `pip install -r requirements.txt`.
+- Now do `./client.sh`. (if that doesnt run try `source venv/bin/activate` then `python3 scripts/client.py)
 # Installation (Server)
 ## Linux 
 - First install git, which i assume you already have
@@ -27,10 +27,10 @@ git clone https://github.com/maybe-asdf/chaasnyx/
 ```
 git clone https://github.com/maybe-asdf/chaasnyx/
 ```
-- CD into the cloned repo, and run `./setup.sh`
-- Now do `./server.sh`.
+- CD into the cloned repo, and run `python3 -m venv venv` then `source venv/bin/activate` and finally `pip install -r requirements.txt`.
+- Now do `./server.sh`. (if that doesnt run try `source venv/bin/activate` then `python3 scripts/server.py)
 ### Port forwarding
-- More details on this can be accessed on probably your router providers website, but for the service to be accessed outside of your home network you need to forward port 6741
+- More details on this can be accessed on probably your router providers website, but for the service to be accessed outside of your home network you need to forward port 6741 by default.
 # Roadmap
 - Commands [✅]
 - Whisper [✅]

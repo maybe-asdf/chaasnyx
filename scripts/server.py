@@ -1,4 +1,4 @@
-ver = "v000002"
+ver = "v000003"
 print(fr"""
       __                               
  ____/ /  ___ ____ ____ ___  __ ____ __
@@ -11,21 +11,33 @@ def log(thing):
 log("Importing asyncio and sys")
 import asyncio
 import sys
+import os
 log("Importing json and toml")
 import json
 import toml
+from collections import deque
 log("Importing websockets")
 from websockets.asyncio.server import serve
 log("Finished importing")
 clients = set()
 senders = set()
 user_map = {} 
-with open("server.config") as f:
+with open("server.toml") as f:
      config = toml.loads(f.read())
 admins = config["roles"]["admin"]
 mods = config["roles"]["mod"]
+persist_chat = config["chat_history"]["persist"]
+if persist_chat:
+    try:
+        with open("server_history.txt") as f:
+            chat_history = deque(json.load(f), maxlen=config["chat_history"]["limit"])
+    except FileNotFoundError:
+        chat_history = deque([], maxlen=config["chat_history"]["limit"])
+else:
+    chat_history = deque([], maxlen=config["chat_history"]["limit"])
 log("Defining..")
 async def handler(websocket):
+    global chat_history
     join_msg_string = await websocket.recv()
     join_msg = json.loads(join_msg_string)
 
@@ -50,7 +62,8 @@ async def handler(websocket):
         except:
             clients.discard(client)
             senders.discard(sender_name)
-
+    for i in list(chat_history):
+        await websocket.send(json.dumps(i))
     try:
         async for message_string in websocket:
             message = json.loads(message_string)
@@ -66,6 +79,8 @@ async def handler(websocket):
                     await websocket.send(json.dumps({"sender": "SERVER", "content": ">list - lists all active users"}))
                     await websocket.send(json.dumps({"sender": "SERVER", "content": ">stop - stops the server (only can be used by admins)"}))
                     await websocket.send(json.dumps({"sender": "SERVER", "content": ">kick username - kicks someone (only can be used by moderators)"}))
+                    await websocket.send(json.dumps({"sender": "SERVER", "content": ">clearhistory - clears chat history ON THE SERVER! (admin only)"}))
+
                 elif command[0] == ">kick":
                                 if sender in mods and len(command) > 1:
                                     target = command[1]
@@ -78,6 +93,8 @@ async def handler(websocket):
                                         await websocket.send(json.dumps({"sender": "SERVER", "content": "User not found."}))
                                 else:
                                     await websocket.send(json.dumps({"sender": "SERVER", "content": "Usage: >kick username (only can be used by mods)"}))
+                elif command[0] == ">clearhistory":
+                        chat_history = deque([], maxlen=config["chat_history"]["limit"])
                 elif command[0] == ">msg":
                     if len(command) < 3:
                         await websocket.send(json.dumps({"sender": "SERVER", "content": "Usage: >msg username message"}))
@@ -104,6 +121,11 @@ async def handler(websocket):
                 else:
                     await websocket.send(json.dumps({"sender": "SERVER", "content": "Unknown command. Try >help"}))
             else:
+                chat_history.append({"sender": sender, "content": message_content})
+                if persist_chat:
+                    with open("server_history.txt", "w") as f:
+                        json.dump(list(chat_history), f)
+
                 for client in clients.copy():
                     try:
                         await client.send(json.dumps({"sender": sender, "content": message_content}))
