@@ -34,6 +34,7 @@ git clone https://github.com/maybe-asdf/chaasnyx/
 # Roadmap
 - Commands [✅]
 - Whisper [✅]
+- Chat history [✅]
 - Role system [🔨]
 - Passwords for privileged usernames [❌]
 - Plugin system [❌]
